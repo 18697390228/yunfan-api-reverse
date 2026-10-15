@@ -3,13 +3,12 @@
 For each module capture: list query (pagination params), create, save, submit, approve, delete, detail query. For documents, verify the six universal actions and record the `base` path + doc type code.
 
 ## Products
-- [x] List query (pagination, filter by barcode/name/category)
-- [x] `POST /web/api/product/common/getItemByBarcodeOrCode` `{"keyword": "..."}`
-- [x] `POST /web/api/product/common/getItemInfoByIds` (batch)
-- [x] Create / save / delete product — **verified 2026-10-14** (see `references/product-archive.md`; spec field is `size`, parse from name, verify-after-save mandatory)
-- [x] `GET /web/api/product/item/barcode/search?barcode={条码}` — barcode library pre-fill (name hint only; spec untrusted)
-- [x] `POST /web/api/product/unit/getListData` — unit ID resolution
+- [ ] List query (pagination, filter by barcode/name/category)
+- [ ] `POST /web/api/product/common/getItemByBarcodeOrCode` `{"keyword": "..."}`
+- [ ] `POST /web/api/product/common/getItemInfoByIds` (batch)
+- [ ] Create / save / delete product
 - [ ] **Batch category change** (priority — needed for bulk reclassification)
+- [ ] Image upload (if any)
 
 ## Categories
 - [ ] Full category tree (code, level, is-leaf flag)
@@ -55,6 +54,7 @@ For each module capture: list query (pagination params), create, save, submit, a
 
 ## Reports
 - [ ] Sales summary (by product / category / date — priority, used for sales stats)
+  - 客流口径（2026-10-15 用户立）：默认取交易笔数（订单数）。云帆 POS 报表没有进店人数字段，门店也没有客流计数器设备；客单价=销售额/交易笔数。
 - [ ] Stock summary
 - [ ] Purchase-sale-inventory report
 
