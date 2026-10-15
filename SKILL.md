@@ -18,6 +18,7 @@
 - **用户说"综合调价"（同时调进价+售价）就是 TG**，不要往 TA 上靠。
 - **调价单明细必须用全字段结构（约103字段），不可精简**——只传几个字段会导致服务端 `系统开会小差` 崩溃。做法：从本仓库 `references/price_detail_template.json` 深拷贝完整结构，只替换商品ID/编码/品名/条码/包装ID及四个新旧价格（2026-10-15 实测）。
 - **调价单只存草稿，不调用 doSubmit**（2026-10-15 用户立：已提交的单据浏览器端无法直接勾选"更新档案价"，须先召回；草稿可直接打开勾选后审核）。
+- **采购计划单 CJ 已打通**（2026-10-15）：base `/web/api/purchase/purchasePlanOrder`。表头必填 `receiveBranchId=45050580`、`receiveBranchCode=000002`、`receiveBranchName=002`、`receiveBranchType=2`、`planType=0`。明细模板见本仓库 `references/cj_detail_template.json`：qty 等数量为字符串（×10000），price 为数字（×10000）。
 
 - doSaveEntity 直接发送 entity 本体，不要在外面再包一层。doApprove 的 body 是 {"id": "单据ID"}，这是 2026-10-13 用用户浏览器 F12 抓包确认的。doSubmit 的 body 是 {"ids": "单据ID"}，ID 用字符串，这是 2026-10-14 实测确认的。doLoadEntity 用单数的 id。
 
