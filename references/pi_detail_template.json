@@ -1,0 +1,21 @@
+{
+ "itemId": 0,
+ "otherItemId": 0,
+ "itemCode": "商品编码",
+ "itemName": "商品名称",
+ "itemSubno": "商品条码",
+ "qty": "200000",
+ "purchaseQty": "200000",
+ "basicQty": "200000",
+ "purchaseUnitQty": "10000",
+ "unitQty": "10000",
+ "price": "230000",
+ "purchasePrice": "230000",
+ "basicPrice": "230000",
+ "amt": "4600000",
+ "unitName": "盒",
+ "stockUnitName": "盒",
+ "purchaseUnitName": "盒",
+ "sequence": 1,
+ "_说明": "数量/价格/金额均为字符串，元×10000。qty=20个→200000，price=23元→230000，amt=qty*price/10000"
+}
