@@ -15,6 +15,9 @@
 - 云帆所有业务单据都走同一套动作。doNewEntity 取空模板，doSaveEntity 保存，doLoadEntity 按数字 ID 读取，doSubmit 提交，doApprove 审核，doDeleteEntity 删除。基址加上动作名就是完整 URL。
 
 - 五种常用单据的基址要背下来，**不要探测猜测**（猜出的路径一律不存在）。调零售价单 TA 是 /web/api/shop/retailPrice。调进价单 TH 是 /web/api/shop/purchasePriceChange。进售价调整单 TG 是 /web/api/shop/compositePriceChange。采购计划单 CJ 是 /web/api/purchase/purchasePlanOrder。生鲜验收单 PI 是 /web/api/stock/purchaseIn。
+- - **第二轮单据基址（2026-11-02 实测，M3 禹州店，列表统一走 {base}/getListData、明细统一走 {base}/doLoadEntity）**：采购退货单 RO 是 /web/api/stock/purchaseOut，**列表必须带 dateType:"1"，否则报 300001“时间类型不能为空”**（先前误以为是基址错，实为缺参数）。领用出库单 LC 是 /web/api/stock/use。其他出库单 QC 是 /web/api/stock/otherOutOrder（不是 otherOut，少了 Order）。供应商转入单 OR 是 /web/api/stock/supplierIn。供应商转出单 OC 是 /web/api/stock/supplierOut。快速盘点单 PQ 是 /web/api/stock/quickCheck。六种单据 2026-11-02 全量拉取（8 月→11 月 2 日）154 张、明细 12,985 行，RO/LC/QC/OR/OC 明细行与出入库流水行分毫不差。
+  - - **调拨 TO 没有独立单据类型**：调拨为 BC 出库 / BR 收货 / TS 申请 / BD 差异，本店流水为 0，无需拉取。
+    - - **盘点类流水挂接键**：流水行的 sheetNo 自成一号（如 PY0000…），须用 businessSheetNo 挂回源单据（businessSheetType 为 PH 或 PQ）；PQ 明细是全量盘点清单，PY 行只记有差异的调整行，行数不等是正常的（2026-11-02 实测：20 张 PQ 单张张有 PY 行挂接，抽查单 PY 品全在明细内）。
 - **用户说"综合调价"（同时调进价+售价）就是 TG**，不要往 TA 上靠。
 - **调价单明细必须用全字段结构（约103字段），不可精简**——只传几个字段会导致服务端 `系统开会小差` 崩溃。做法：从本仓库 `references/price_detail_template.json` 深拷贝完整结构，只替换商品ID/编码/品名/条码/包装ID及四个新旧价格（2026-10-15 实测）。
 - **调价单只存草稿，不调用 doSubmit**（2026-10-15 用户立：已提交的单据浏览器端无法直接勾选"更新档案价"，须先召回；草稿可直接打开勾选后审核）。
