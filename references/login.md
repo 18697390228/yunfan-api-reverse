@@ -37,7 +37,7 @@ Use the freshest `sliderToken` for the next step.
 
 ## Step 4: Login
 
-Two login modes:
+Two login modes. **Both modes work for both M3 and M5 tenants — the mode is the user's choice, not a per-tenant property.** Do not assume M3 = user-code and M5 = account.
 
 **Account login** (`loginMode: 1`):
 ```json
@@ -73,12 +73,18 @@ Two login modes:
 
 Account is single-session. If `301544`, add `"continueLogin": 1` to the login body **only with explicit user authorization** — it kicks the other session's token immediately.
 
+## Verified 2026-11-02
+
+- User-code login (`loginMode: 4`) verified working: slider solved on first attempt, login returned code 0, token verified against the stock API (`/web/api/stock/report/stock/getListData` returned code 0 with rows).
+- M3 account login with the credentials tried earlier returned 295002 (password error); user-code login with its own credentials succeeded. If one mode fails on credentials, try the other mode with its own credentials.
+- `loginName` header = the login identifier of the mode used: phone/account for account login, userCode for user-code login.
+
 ## Auth headers for all subsequent requests
 
 | Header | Source |
 |---|---|
 | `token` | login response `data.token` |
-| `loginName` | login username |
+| `loginName` | login identifier of the mode used (phone/account for account login, userCode for user-code login) |
 | `shopAdminId` | merchant number |
 | `merchantName` | company name, `encodeURIComponent`-encoded |
 
