@@ -1,0 +1,1 @@
+{"apkUrl":"https://github.com/18697390228/yunfan-api-reverse/releases/download/v3.9.1/yunfan-app-3.9.1-debug.apk","changelog":"1. 修复：设置页保存的登录账号未同步到档案，用户编码登录会误发旧手机号导致账号密码错误\n2. 登录方式可选：账号登录 / 用户编码登录（M3/M5 通用）\n3. 新增自动更新：启动时每天检查一次，设置页可手动检查","force":false,"versionCode":29,"versionName":"3.9.1"}
