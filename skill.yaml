@@ -1,0 +1,28 @@
+name: local_yunfan_api_reverse
+title: Yunfan API Reverse Engineering
+description: Reverse-engineer and operate Kemai Yunfan retail backend APIs across M3 and M5 tenants. Capture interfaces from the browser, replay-verify them, then run the verified document catalog for pricing, purchasing, stock and sales.
+category: Work and knowledge
+include_in_prompt: true
+skill_improvement:
+  managed: true
+  status: active
+  evidence_handles:
+  - message:b566ea71
+  - message:68dd4223
+  - message:aaa51e5c
+  - message:d3b900f9
+  - message:249d3d18
+  - message:7edf16a8
+  - message:91268a3a
+  - message:296e4ea7
+  - message:21ea9444
+  - 'skill_inventory: local_yunfan_api_reverse rev 063a2b1bad5c93928ec2e573e570e0e5e22785451bc0b0048e6713fac09f375b'
+  measurement:
+    proxy_metric_id: yunfan_guidance_correction_incidents
+    success_criterion: No new incidents in 30 days where an estimated transaction count or average ticket is presented as the official figure, where the transaction count or average ticket is missing from the mirror summary or the daily report, or where the daily comparison uses the standard definitions of the comparison labels instead of the user's definitions.
+    window_days: 30
+  needs_review: false
+  rationale: 'On 2026-11-06 the user asked for the 11-05 transaction count and average ticket (message:b566ea71). The assistant first gave an estimated 941 tickets with an inferred official range (message:68dd4223). The user rejected it (message:aaa51e5c: user said they do not want estimates and the system module can be checked). The vault credential then failed in both login modes and the assistant stopped to avoid lockout (message:d3b900f9). The correct figures, 1085 tickets and 19.81 yuan average ticket, only came from the mirror-sync login pulling the 101 report (messages:249d3d18, 7edf16a8). The user then set the standing rule that the transaction count and average ticket go into the mirror server summary and the daily report every day, with sales and margin compared against yesterday and last week under the user''s own labels plus a cause analysis (messages:91268a3a, 296e4ea7), and that daily reports are delivered as documents only (message:21ea9444). The current skill only says footfall defaults to transaction count and names the sales summary query; it has no rule against estimating official figures, no authoritative source for the daily figures, no login-failure stop rule, and no daily-report content rule. The 101 endpoint is already verified in references/modules.md (get101ListData, saleCnt and saleAmt stored times 10000). A new method section in the existing managed skill captures the rule where the daily report work already lives, so the next daily report fetches instead of estimating. Other signals were checked and rejected: 7 active learned skills is below the 10-skill consolidation trigger, all 33 scheduled runs in the window succeeded with 0 failed cron runs, the 75 terminal tool failures lack attributable error detail, the deterministic rollup candidates (memory, relationships, shopping, alignment, ideas, travel suppressions) need prompt or policy changes out of scope for this loop, and the recovered notes are already retired.'
+  review_after: 2026-12-06T00:49:38.444754+00:00
+  reviewed_at: 2026-11-06T00:49:38.444754+00:00
+  run_id: sirun_12d7b9b950364ca69423118cb70846f2
